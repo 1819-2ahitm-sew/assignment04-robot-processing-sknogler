@@ -12,20 +12,45 @@ public class Main extends PApplet {
         PApplet.main("at.htl.robot.gui.Main", args);
     }
 
+
+    int leftMargin = 50;
+    int upperMargin = 50;
+    int boxLength = 50;
+    Robot robot;
+
     public void settings() {
         size(800, 800);
     }
 
     public void setup() {
         background(209); //https://processing.org/tutorials/color/
+        robot = new Robot();
 
-
+        robot.setX(1);
+        robot.setY(1);
     }
 
     /**
      * Diese Methode wird iterativ durchlaufen (wie loop() beim Arduino)
      */
     public void draw() {
+        strokeWeight(2);
+
+        for (int i = 0; i < 11; i++) {
+            line(
+                    leftMargin,
+                    upperMargin + i * boxLength,
+                    leftMargin + 10 * boxLength,
+                    upperMargin + i * boxLength);
+
+            line(
+                    leftMargin + i * boxLength,
+                    upperMargin,
+                    leftMargin + i * boxLength,
+                    upperMargin + 10 * boxLength);
+        }
+
+        drawRobot();
 
     }
 
@@ -36,8 +61,16 @@ public class Main extends PApplet {
      *
      * @param robot Objekt des zu zeichnenden Roboters
      */
-    public void drawRobot(Robot robot) {
+    public void drawRobot() {
+        int boxCenterX = leftMargin - boxLength / 2 + robot.getX() * boxLength;
+        int boxCenterY = leftMargin - boxLength / 2 + robot.getY() * boxLength;
 
+        ellipse(
+                boxCenterX,
+                boxCenterY,
+                (int) (boxLength * 0.8),
+                (int) (boxLength * 0.8)
+        );
 
     }
 
@@ -45,7 +78,7 @@ public class Main extends PApplet {
      * Erstellen Sie eine eigene Methode zum Löschen des Bildschirms
      */
     public void deleteAll() {
-
+        background(209);
     }
 
     /**
@@ -55,9 +88,11 @@ public class Main extends PApplet {
         println("pressed " + key + " " + keyCode);
 
         if (key == 'f' || key == 'F') {
-
+            deleteAll();
+            robot.stepForward();
         } else if (key == 'l' || key == 'L') {
-
+            deleteAll();
+            robot.rotateLeft();
         }
 
     }
