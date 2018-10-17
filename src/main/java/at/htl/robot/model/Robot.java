@@ -35,19 +35,30 @@ public class Robot {
     //endregion
 
     public int stepForward() {
-        switch (direction) {
-            case SOUTH:
-                y += 1;
-                return y;
-            case NORTH:
+        if (this.direction == Direction.NORTH){
+            if (y == 2){
+                this.y = 2;
+            } else {
                 y -= 1;
-                return y;
-            case WEST:
+            }
+        } else if (this.direction == Direction.WEST){
+            if (x == 1){
+                this.x = 1;
+            } else {
                 x -= 1;
-                return x;
-            case EAST:
+            }
+        } else if (this.direction == Direction.SOUTH){
+            if (y == 11){
+                this.y = 11;
+            } else {
+                y += 1;
+            }
+        } else if (this.direction == Direction.EAST) {
+            if (x == 10) {
+                this.x = 10;
+            } else {
                 x += 1;
-                return x;
+            }
         }
         return x;
     }

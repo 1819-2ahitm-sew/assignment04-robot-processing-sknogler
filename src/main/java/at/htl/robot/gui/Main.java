@@ -14,7 +14,7 @@ public class Main extends PApplet {
 
 
     int leftMargin = 50;
-    int upperMargin = 50;
+    int upperMargin = 100;
     int boxLength = 50;
     Robot robot;
 
@@ -27,13 +27,18 @@ public class Main extends PApplet {
         robot = new Robot();
 
         robot.setX(1);
-        robot.setY(1);
+        robot.setY(2);
     }
 
     /**
      * Diese Methode wird iterativ durchlaufen (wie loop() beim Arduino)
      */
     public void draw() {
+        textSize(40);
+        text("Smoni der kleine Roboter", 50, 40);
+        textSize(30);
+        text("press <f> to move forward , <l> to turn left", 50, 80);
+
         strokeWeight(2);
 
         for (int i = 0; i < 11; i++) {
@@ -96,13 +101,5 @@ public class Main extends PApplet {
         }
 
     }
-
-//    public void keyTyped() {
-//        println("typed " + key + " " + keyCode);
-//    }
-//
-//    public void keyReleased() {
-//        println("released " + key + " " + keyCode);
-//    }
 
 }
